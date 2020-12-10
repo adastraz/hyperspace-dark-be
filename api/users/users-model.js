@@ -9,7 +9,7 @@ module.exports = {
 }
 
 function find() {
-    return db('users').select('id', 'username', 'type', 'game')
+    return db('users').select('id', 'username', 'type', 'game', 'fullname')
 }
 
 async function add(user) {

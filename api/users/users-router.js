@@ -42,6 +42,23 @@ router.get('/:id/username', (req, res) => {
         })
 })
 
+router.get('/:id/game', (req, res) => {
+    const { id } = req.params
+
+    Users.findBy({ game: id })
+        .then(user => {
+            if (user) {
+                res.status(200).json(user)
+            } else {
+                res.status(404).json({ message: 'Could not find the game with given id.' })
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({ message: 'Failed to get user' })
+        })
+})
+
 router.put('/:id', idUser, (req, res) => {
     const { id } = req.params
 

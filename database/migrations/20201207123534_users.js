@@ -10,6 +10,8 @@ exports.up = function(knex) {
             tbl.string('type', 20)
                 .notNullable()
                 .defaultTo('player')
+            tbl.string('fullname', 255)
+                .notNullable()
             tbl.string('game', 30)
                 .notNullable()
         })

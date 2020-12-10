@@ -42,14 +42,14 @@ function validateLoginCred (req, res, next) {
 const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[`~!@#$%^&*()_=<+>?=.,]).{8,20}$/i
 
 function validateRegCred (req, res, next) {
-    if (req.body.username && req.body.password && req.body.type && req.body.game) {
+    if (req.body.username && req.body.password && req.body.type && req.body.game && req.body.fullname) {
         if (passwordPattern.test(req.body.password)) {
             next()
         } else {
             res.status(200).json({ message: 'does not meet password requirements' })
         }
     } else {
-        res.status(500).json({ message: 'enter a username, password, and birthday' })
+        res.status(500).json({ message: 'enter a username, password, game, type, and fullname' })
     }
 }
 
@@ -58,7 +58,8 @@ function generateToken (user) {
         id: user.id,
         username: user.username,
         type: user.type,
-        game: user.game
+        game: user.game,
+        fullname: user.fullname
     }
     const options = {
         expiresIn: '1hr'

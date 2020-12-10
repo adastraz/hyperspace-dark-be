@@ -4,6 +4,8 @@ const helmet = require('helmet')
 
 const authenticate = require('./auth/authenticate-middleware.js')
 const authRouter = require('./auth/auth-router.js')
+const usersRouter = require('./users/users-router.js')
+const scheduleRouter = require('./schedule/schedule-router.js')
 
 const server = express()
 
@@ -12,6 +14,8 @@ server.use(cors())
 server.use(express.json())
 
 server.use('/api/auth', authRouter)
+server.use('/api/schedule', scheduleRouter)
+server.use('/api/users', authenticate, usersRouter)
 
 server.get('/', (req, res) => {
     const response = ({
